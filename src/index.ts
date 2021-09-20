@@ -6,7 +6,7 @@ import { exit } from "process";
 
 new Command()
   .argument("<logsFile>", "path to the SARIf logs file")
-  .option("-i, --info <Informational>", "informational threshold", parseInt)
+  .option("-i, --informational <Informational>", "informational threshold", parseInt)
   .option("-l, --low <Low>", "low threshold", parseInt, 0)
   .option("-m, --medium <Medium>", "medium threshold", parseInt, 0)
   .option("-h, --high <High>", "high threshold", parseInt, 0)
