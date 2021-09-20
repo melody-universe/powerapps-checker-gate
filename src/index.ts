@@ -6,7 +6,11 @@ import { exit } from "process";
 
 new Command()
   .argument("<logsFile>", "path to the SARIf logs file")
-  .option("-i, --informational <Informational>", "informational threshold", parseInt)
+  .option(
+    "-i, --informational <Informational>",
+    "informational threshold",
+    parseInt
+  )
   .option("-l, --low <Low>", "low threshold", parseInt, 0)
   .option("-m, --medium <Medium>", "medium threshold", parseInt, 0)
   .option("-h, --high <High>", "high threshold", parseInt, 0)
@@ -36,22 +40,24 @@ new Command()
         }, rootLevels),
       {}
     );
-    const errorMessages: string[] = [];
+    let errorThrown: boolean = false;
     for (const severity of Object.keys(options) as Severity[]) {
       if (
         options[severity] !== undefined &&
         severityLevels[severity] !== undefined &&
         (severityLevels[severity] as number) > (options[severity] as number)
       ) {
-        errorMessages.push(
+        console.error(
           `Passed threshold for severity "${toTitleCase(severity)}." ` +
             `Issues found: ${severityLevels[severity]}. ` +
             `Max threshold: ${options[severity]}`
         );
+        if (!errorThrown) {
+          errorThrown = true;
+        }
       }
     }
-    if (errorMessages.length > 0) {
-      errorMessages.forEach((message) => console.error(message));
+    if (errorThrown) {
       exit(1);
     }
   })
@@ -66,6 +72,17 @@ interface Levels {
   high?: number;
   critical?: number;
 }
+
+const input: Levels = {
+  low: 0,
+  medium: 0,
+  high: 0,
+  critical: 0,
+};
+
+const found: Levels = {
+  medium: 1,
+};
 
 function toTitleCase(value: string) {
   if (value.length === 0) {
