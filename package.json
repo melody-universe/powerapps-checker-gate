@@ -1,6 +1,6 @@
 {
   "name": "powerapps-checker-gate",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Command-line utility that throws an error if a PowerApps Checker SARIF file exceeds a provided threshold.",
   "bin": {
     "powerapps-checker-gate": "dist/main.js"
