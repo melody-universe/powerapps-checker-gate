@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Log } from "sarif";
 import merge from "merge";
 import { Command } from "commander";
