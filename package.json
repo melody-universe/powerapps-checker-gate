@@ -9,7 +9,8 @@
     "dist/"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "start": "ts-node src/index.ts"
   },
   "keywords": [],
   "author": "",
